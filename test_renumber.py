@@ -19,3 +19,18 @@ def test_plan_supports_name_and_step():
 def test_check_flags_collisions():
     pairs = [("a.txt", "same.txt"), ("b.txt", "same.txt")]
     assert renumber.check(pairs)
+
+
+def test_check_passes_for_a_clean_plan(tmp_path):
+    old = tmp_path / "a.txt"
+    old.write_text("x", encoding="utf-8")
+    pairs = renumber.plan([str(old)], "{n:02d}{ext}")
+    assert renumber.check(pairs) == []
+
+def test_apply_can_swap_two_names(tmp_path):
+    a, b = tmp_path / "a.txt", tmp_path / "b.txt"
+    a.write_text("A", encoding="utf-8")
+    b.write_text("B", encoding="utf-8")
+    renumber.apply([(str(a), str(b)), (str(b), str(a))])
+    assert a.read_text(encoding="utf-8") == "B"
+    assert b.read_text(encoding="utf-8") == "A"
