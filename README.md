@@ -16,3 +16,14 @@ python renumber.py *.jpg -p "holiday-{n:03d}{ext}" --apply
 python renumber.py *.mp3 --sort mtime -p "{n:02d} - {name}{ext}" --apply
 python renumber.py photos/* --start 100 --step 10
 ```
+
+## Pattern fields
+
+| field  | meaning |
+|--------|---------|
+| `{n}`  | the running number, starting at `--start` |
+| `{i}`  | zero-based index |
+| `{name}` | original filename without the extension |
+| `{ext}`  | original extension, including the dot |
+
+Standard format specs work, so `{n:03d}` gives `007`.
