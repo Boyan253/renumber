@@ -27,3 +27,10 @@ python renumber.py photos/* --start 100 --step 10
 | `{ext}`  | original extension, including the dot |
 
 Standard format specs work, so `{n:03d}` gives `007`.
+
+## Safety
+
+- Nothing happens without `--apply`.
+- Collisions (two files mapping to one name, or a target that already exists
+  outside the set) are reported and abort the run.
+- Renames go through temporary names, so rotating `a -> b -> c -> a` works.
