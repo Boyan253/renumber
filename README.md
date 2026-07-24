@@ -34,3 +34,10 @@ Standard format specs work, so `{n:03d}` gives `007`.
 - Collisions (two files mapping to one name, or a target that already exists
   outside the set) are reported and abort the run.
 - Renames go through temporary names, so rotating `a -> b -> c -> a` works.
+
+## Tests
+
+```
+pip install pytest
+pytest
+```
