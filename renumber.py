@@ -6,6 +6,8 @@ import os
 import re
 import sys
 
+__version__ = "0.1.0"
+
 SORTS = {
     "name": lambda p: natural_key(os.path.basename(p)),
     "mtime": lambda p: os.path.getmtime(p),
@@ -62,6 +64,8 @@ def apply(pairs):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--version", action="version",
+                    version="%(prog)s " + __version__)
     ap.add_argument("files", nargs="+", help="files to rename (shell glob)")
     ap.add_argument("-p", "--pattern", default="{n:03d}{ext}",
                     help="target name; fields: {n} {i} {name} {ext}")
